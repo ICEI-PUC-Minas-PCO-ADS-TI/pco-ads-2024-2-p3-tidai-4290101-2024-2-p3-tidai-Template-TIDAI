@@ -1,46 +1,73 @@
 # Introdução
 
-Texto descritivo com a visão geral do projeto abordado. Inclui o contexto, o problema, os objetivos, a justificativa e o público-alvo do projeto.
+Este trabalho aborda o desenvolvimento de um sistema de gestão acadêmica, um software essencial
+para otimizar a administração de instituições de ensino. Em um contexto onde a transformação
+digital tem impulsionado a eficiência e a competitividade em diversos setores, a educação não pode
+ficar para trás. Instituições de ensino enfrentam desafios crescentes na organização de dados, na
+comunicação com estudantes e na execução de tarefas administrativas diárias. De acordo com um
+estudo da EDUCAUSE (2019), mais de 70% das instituições que adotaram sistemas de gestão
+acadêmica relataram melhorias significativas na eficiência operacional e na satisfação dos alunos. 
+
+No Brasil, a demanda por soluções tecnológicas no setor educacional tem crescido exponencialmente,
+especialmente com o aumento do ensino à distância e da necessidade de ferramentas que
+centralizem e automatizem processos. Este trabalho, portanto, se insere na interseção entre
+tecnologia da informação e gestão educacional, buscando desenvolver um sistema que não apenas
+atenda às necessidades operacionais, mas que também promova um ambiente de aprendizado mais
+eficiente e integrado.
 
 ## Problema
-Aqui, a equipe deve fornecer uma descrição detalhada do problema a ser resolvido. Não é o momento adequado para abordar questões técnicas relacionadas ao desenvolvimento da aplicação. O objetivo é compreender e comunicar de maneira precisa qual é o desafio ou necessidade que motiva a criação da aplicação.
+O problema que este projeto pretende resolver está relacionado à ineficiência e à fragmentação dos
+processos administrativos em instituições de ensino, resultando em processos lentos e suscetíveis a
+erros. Muitas dessas instituições ainda dependem de métodos manuais ou sistemas desconectados
+para gerenciar tarefas cruciais, como o cadastro de alunos, a organização de turmas, o
+acompanhamento de desempenho acadêmico e a comunicação entre alunos, professores e
+administradores. 
 
-Descreva também o contexto em que essa aplicação será usada, se  houver: empresa, tecnologias, etc. Novamente, descreva apenas o que de fato existir, pois ainda não é a hora de apresentar requisitos detalhados ou projetos.
-
-O grupo pode optar por fazer uso de ferramentas como Design Thinking, que permite uma visão completa do problema.
-
-> **Links úteis**:
-> - [Objetivos, problema de pesquisa e justificativa](https://medium.com/@versioparole/objetivos-problema-de-pesquisa-e-justificativa-c98c8233b9c3)
-> - [Matriz certezas, suposições e dúvidas](https://medium.com/educa%C3%A7%C3%A3o-fora-da-caixa/matriz-certezas-suposi%C3%A7%C3%B5es-e-d%C3%BAvidas-fa2263633655)
-> - [Brainstorming](https://www.euax.com.br/2018/09/brainstorming/)
+Essa falta de integração e automatização não apenas gera retrabalho, mas também
+dificulta o acesso a informações atualizadas e compromete a eficiência operacional. Com o
+crescimento da digitalização e o aumento da demanda por ensino à distância, a necessidade de uma
+solução que centralize e agilize esses processos se torna ainda mais evidente. A motivação deste
+projeto é, portanto, desenvolver um sistema capaz de otimizar essas operações, promovendo uma
+gestão acadêmica mais ágil, segura e eficiente, que atenda às demandas das instituições de ensino
+modernas.
 
 ## Objetivos
 
-Aqui, você deve descrever os objetivos do trabalho, indicando que o objetivo geral é desenvolver um software para solucionar o problema apresentado acima.
+### Objetivo Geral
 
-Além disso, apresente alguns (pelo menos 3) objetivos específicos, dependendo de onde você pretende concentrar sua prática investigativa ou como deseja aprofundar seu trabalho.
- 
-> **Links úteis**:
-> - [Objetivo geral e objetivo específico: como fazer e quais verbos utilizar](https://blog.mettzer.com/diferenca-entre-objetivo-geral-e-objetivo-especifico/)
+Desenvolver e implementar um sistema de gestão acadêmica que centralize, automatize e
+agilize os processos administrativos de uma instituição de ensino, promovendo maior
+eficiência, segurança e integração entre todas as áreas envolvidas
+
+### Objetivos Espcifícos
+
+- **Automatizar Processos Administrativos**: Eliminar tarefas manuais e repetitivas, como o cadastro de alunos, matrículas em disciplinas, e emissão de documentos, através da implementação de funcionalidades automáticas no sistema.
+  
+- **Integrar Diferentes Áreas da Instituição**: Facilitar a comunicação e o fluxo de informações entre alunos, professores, coordenadores e a administração, por meio de uma plataforma centralizada.
+
+- **Melhorar o Acesso e a Gestão de Dados**: Desenvolver funcionalidades que permitam o armazenamento seguro e o acesso rápido a dados acadêmicos, como notas, frequência, e histórico escolar, promovendo uma gestão mais eficaz.
+
+- **Garantir a Segurança e a Conformidade dos Dados**: Implementar mecanismos de segurança, como criptografia e controle de acesso, para proteger os dados sensíveis de alunos e funcionários, garantindo a conformidade com as leis de proteção de dados.
+
+- **Facilitar o Ensino à Distância**: Criar módulos que suportem o ensino remoto, oferecendo funcionalidades como registro de aulas online, submissão de trabalhos, e avaliações à distância.
+
+- **Proporcionar uma Experiência de Usuário Intuitiva**: Desenvolver uma interface amigável e intuitiva para facilitar o uso do sistema por todos os seus usuários, reduzindo a curva de aprendizado e aumentando a satisfação.
+
+- **Realizar Testes e Validações do Sistema**: Conduzir testes rigorosos durante as fases de desenvolvimento para garantir que o sistema atenda aos requisitos funcionais e não funcionais previstos.
+
+- **Documentar o Processo de Desenvolvimento**: Produzir documentação detalhada sobre cada etapa do desenvolvimento, incluindo diagramas de arquitetura, códigos, e manuais de uso, para garantir a manutenção futura do sistema.
 
 ## Justificativa
 
-Descreva a importância ou a motivação para trabalhar com esta aplicação que você escolheu. Indique as razões pelas quais você escolheu seus objetivos específicos ou as razões para aprofundar em certos aspectos do software.
-
-O grupo de trabalho pode fazer uso de questionários, entrevistas e dados estatísticos, que podem ser apresentados, com o objetivo de esclarecer detalhes do problema que será abordado pelo grupo.
-
-> **Links úteis**:
-> - [Como montar a justificativa](https://guiadamonografia.com.br/como-montar-justificativa-do-tcc/)
+A justificativa para este trabalho baseia-se na necessidade urgente de melhorar a eficiência
+administrativa em instituições de ensino, que ainda dependem de processos manuais e sistemas
+desatualizados. Desenvolver um sistema de gestão acadêmica centralizado e automatizado trará
+benefícios significativos, como a redução de retrabalho, o aumento da agilidade nas operações e a
+melhora na comunicação entre alunos, professores e administradores. Além disso, o sistema facilitará a
+adaptação da instituição ao ensino à distância e às novas demandas tecnológicas, contribuindo para um
+ambiente educacional mais organizado e eficiente.
 
 ## Público-alvo
 
-Descreva quem serão as pessoas que usarão a sua aplicação indicando os diferentes perfis. O objetivo aqui não é definir quem serão os clientes ou quais serão os papéis dos usuários na aplicação. A ideia é, dentro do possível, conhecer um pouco mais sobre o perfil dos usuários: conhecimentos prévios, relação com a tecnologia, relações
-hierárquicas, etc.
-
-Adicione informações sobre o público-alvo por meio de uma descrição textual, diagramas de personas e mapa de stakeholders.
-
-> **Links úteis**:
-> - [Público-alvo](https://blog.hotmart.com/pt-br/publico-alvo/)
-> - [Como definir o público-alvo](https://exame.com/pme/5-dicas-essenciais-para-definir-o-publico-alvo-do-seu-negocio/)
-> - [Público-alvo: o que é, tipos, como definir seu público e exemplos](https://klickpages.com.br/blog/publico-alvo-o-que-e/)
-> - [Qual a diferença entre público-alvo e persona?](https://rockcontent.com/blog/diferenca-publico-alvo-e-persona/)
+O público alvo é a comunidade acadêmica envolvida nos diversos processos relacionados às
+instituições de ensino como: Administradores educacionais, professores e alunos.

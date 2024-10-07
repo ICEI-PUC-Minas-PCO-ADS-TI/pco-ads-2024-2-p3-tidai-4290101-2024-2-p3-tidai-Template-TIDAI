@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bem vindo a UNIBH </title>
+  
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    body {
+      background-color: #f7f7f7;
+    }
+    .navbar-brand {
+      font-weight: bold;
+      color: #007bff;
+    }
+    .hero-section {
+      background-color:  #003366;
+      color: white;
+      padding: 40px 0;
+      text-align: center;
+    }
+    .card-custom {
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+    .card-custom:hover {
+      transform: translateY(-5px);
+    }
+    .login-btn {
+      margin-top: 20px;
+      background-color:  #003366;
+      color: white;
+      font-weight: bold;
+    }
+    .footer-social-icons {
+      list-style: none;
+      padding: 0;
+    }
+    .footer-social-icons li {
+      display: inline;
+      margin: 0 10px;
+    }
+    .footer-social-icons a {
+      color: #003366;
+      font-size: 24px;
+    }
+    .footer-logo {
+      max-width: 150px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">UNIBH</a>
+      <div class="d-flex">
+        <a href="login.html" class="btn btn-primary login-btn">Login Acadêmico</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- cabeçalho -->
+  <section class="hero-section">
+    <div class="container">
+      <h1>Bem-vindo à UNIBH</h1>
+      <p>Confira as últimas novidades, bolsas e notícias da nossa comunidade acadêmica.</p>
+    </div>
+  </section>
+
+  <!-- titulo cards -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Novidades e Notícias</h2>
+      <div class="row g-4">
+        <!-- Card 1 - -->
+        <div class="col-md-4">
+          <div class="card card-custom">
+            <img src="https://fasam.edu.br/wp-content/uploads/2020/09/Bolsas-de-Estudos-FASAM-1.jpg" class="card-img-top" alt="Bolsas de Estudo">
+            <div class="card-body">
+              <h5 class="card-title">Bolsas de Estudo</h5>
+              <p class="card-text">Conheça as oportunidades de bolsas de estudo oferecidas para este semestre.</p>
+              <a href="Saiba mais cursos.html" class="btn btn-primary">Saiba Mais</a>
+            </div>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="col-md-4">
+          <div class="card card-custom">
+            <img src="https://blog.even3.com.br/wp-content/uploads/2022/07/icone-materiais-educativos_guia-p-organizacao-de-congressos-1024x1024.png"
+                 class="card-img-top img-fluid"
+                 style="max-width: 300px; height: auto; display: block; margin: 0 auto;" 
+                 alt="Eventos Acadêmicos">
+            <div class="card-body">
+              <h5 class="card-title">Eventos Acadêmicos</h5>
+              <p class="card-text">Fique por dentro dos próximos eventos acadêmicos e palestras da faculdade.</p>
+              <a href="Saiba mais eventos academicos.html" class="btn btn-primary">Saiba Mais</a>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Card 3 -->
+        <div class="col-md-4">
+          <div class="card card-custom">
+            <img src="https://assets-blog.pagseguro.uol.com.br/wp-content/2021/06/como-guardar-dinheiro-pra-faculdade.jpg" class="card-img-top" alt="Últimas Notícias">
+            <div class="card-body">
+              <h5 class="card-title">Últimas Notícias</h5>
+              <p class="card-text">Veja as últimas notícias da nossa comunidade acadêmica e conquistas de alunos.</p>
+              <a href="Saiba mais noticias.html" class="btn btn-primary">Saiba Mais</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 bg-light">
+    <div class="container">
+      <img src="https://static.vecteezy.com/ti/vetor-gratis/p1/15668053-modelo-de-design-de-logotipo-da-faculdade-ilustracaoial-logotipo-da-faculdade-da-universidade-distintivos-emblemas-sinais-estoque-logotipo-do-campus-da-faculdade-gratis-vetor.jpg" 
+           alt="Logo da UNIBH" class="footer-logo mb-3">
+      <p>&copy; 2024 Faculdade UNIBH. Todos os direitos reservados.</p>
+      <p>Faça parte da nossa comunidade acadêmica e transforme seu futuro!</p>
+      
+      <!-- contatos -->
+      <ul class="footer-social-icons">
+        <li><a href="https://facebook.com" target="_blank"><i class="bi bi-facebook"></i></a></li>
+        <li><a href="https://twitter.com" target="_blank"><i class="bi bi-twitter"></i></a></li>
+        <li><a href="https://instagram.com" target="_blank"><i class="bi bi-instagram"></i></a></li>
+        <li><a href="https://linkedin.com" target="_blank"><i class="bi bi-linkedin"></i></a></li>
+      </ul>
+
+      <p>Contatos: <br> Telefone: (31) 1234-5678 <br> Email: contato@unibh.edu.br</p>
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+  
+</body>
+</html>

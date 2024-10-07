@@ -1,35 +1,52 @@
-# Nome do projeto
+[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=15715573&assignment_repo_type=AssignmentRepo)
+
+# Sistema de Gestão Acadêmica
 
 `CURSO: Análise e Desenvolvimento de Sistemas`
 
 `DISCIPLINA: Trabalho Interdisciplinar Desenvolvimento de Aplicação Interativa`
 
-`Xº semestre/ANO`
+`3º semestre`
 
-Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
+Trabalho com intuito de desenvolver um sistema que
+gerencie os principais processos acadêmicos de forma
+ágil e eficiente, trata-se de um sistema
+web para a comunidade acadêmica de ensino
+superior.
 
 ## Integrantes
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
-* Nome completo do aluno 5
-* Nome completo do aluno 6
+* Arthur Henrique Ribeiro Beiral
+* Davi Lucas do Carmo Nogueira
+* Gustavo Henrique Azeredo Vargas
+* Pedro Henrique Ferreira Gomes Martins
 
 ## Professor
 
-* Nome completo do(a) professor(a)
+* Wagner Cipriano da Silva
 
 ## Instruções de utilização
 
-Assim que a primeira versão do sistema estiver disponível, deverá complementar com as instruções de utilização. Descreva como instalar eventuais dependências e como executar a aplicação.
+O link para acessar a aplicação está disponível abaixo:
 
-Não deixe de informar o link onde a aplicação estará disponível para acesso (por exemplo: https://adota-pet.herokuapp.com/src/index.html).
+[🔗 Acesse a aplicação](https://exemplo.com)
 
-Se houver usuário de teste, o login e a senha também deverão ser informados aqui (por exemplo: usuário - admin / senha - admin).
 
-O link e o usuário/senha descritos acima são apenas exemplos de como tais informações deverão ser apresentadas.
+### Tipos de Usuários e Credenciais de Acesso
+
+Existem três tipos de usuários disponíveis na aplicação, cada um com diferentes permissões e funcionalidades. Use as credenciais abaixo para fazer login de acordo com o tipo de usuário:
+
+#### 1. **Professor**
+- **Usuário:** `professor`
+- **Senha:** `12345`
+
+#### 2. **Aluno**
+- **Usuário:** `aluno`
+- **Senha:** `12345`
+
+#### 3. **Secretário**
+- **Usuário:** `admin`
+- **Senha:** `12345`
 
 # Documentação
 

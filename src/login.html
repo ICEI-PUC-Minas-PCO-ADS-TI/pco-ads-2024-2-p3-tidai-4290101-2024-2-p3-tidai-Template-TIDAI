@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Sistema de Controle Acadêmico</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #003366;
+    }
+    .login-container {
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      background-color: #ffffff;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      text-align: center;
+    }
+    .login-container h2 {
+      margin-bottom: 20px;
+      color: #007bff;
+    }
+    .login-logo {
+      max-width: 200px;
+      margin-bottom: 20px;
+    }
+    .btn-custom {
+      background-color: #003366;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+    <!--Modal de TRoca de senha-->
+    <div class="modal fade" id="confirma-exclusao">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+              <h5 class="modal-title">Esqueci senha</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="mb-3">
+                    <label for="id" class="form-label">Mátricula</label>
+                    <input type="id" class="form-control" id="id" placeholder="Matrícula institucional">
+                  </div>
+                  <div class="mb-3">
+                    <label for="id" class="form-label">Cpf</label>
+                    <input type="id" class="form-control" id="id" placeholder="CPF">
+                  </div>
+                </form>
+                <p><b>Será enviado por email sua nova senha.</b> Caso não tenha mais acesso ao seu email cadastrado, procure o secretário acadêmico para atualizar suas informações cadastrais.</p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-primary">Confirmar</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="login-container">
+    <!-- Logo -->
+    <img src="https://static.vecteezy.com/ti/vetor-gratis/p1/15668053-modelo-de-design-de-logotipo-da-faculdade-ilustracaoial-logotipo-da-faculdade-da-universidade-distintivos-emblemas-sinais-estoque-logotipo-do-campus-da-faculdade-gratis-vetor.jpg" 
+         alt="Logo da UNIBH" class="login-logo">
+    
+    <h2>Sistema de Controle Acadêmico</h2>
+    
+    <!-- login -->
+    <form>
+      <div class="mb-3">
+        <label for="id" class="form-label">Matrícula</label>
+        <input type="id" class="form-control" id="id" placeholder="Matrícula institucional">
+      </div>
+      <div class="mb-3">
+        <label for="senha" class="form-label">Senha</label>
+        <input type="password" class="form-control" id="senha" placeholder="Sua senha">
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="lembrar">
+        <label class="form-check-label" for="lembrar">Lembrar de mim</label>
+      </div>
+      <a href="login-secretario/Index.html" class="btn btn-custom w-100 mb-1">Entrar Secretário</a>
+      <a href="login-professor/index.html" class="btn btn-custom w-100 mb-1">Entrar Professor</a>
+      <a href="login-aluno/index.html" class="btn btn-custom w-100">Entrar Aluno</a>
+    </form>
+    
+    <div class="row">
+    <!-- recuperar senha  -->
+    <div class="col-6 text-center mt-3">
+      <a href="#confirma-exclusao" data-bs-toggle="modal" data-bs-target="#confirma-exclusao">Esqueceu a senha?</a>
+    </div>
+
+    <div class="col-6 text-center mt-3">
+      <a href="index.html">Voltar a tela inicial</a>
+    </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

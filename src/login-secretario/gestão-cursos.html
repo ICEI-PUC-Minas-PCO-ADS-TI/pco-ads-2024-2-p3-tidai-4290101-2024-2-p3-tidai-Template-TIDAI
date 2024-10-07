@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Secretário</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="assets/index.css">
+</head>
+
+<body   id="body-pd">
+    <!--Modal de confirmação-->
+    <div class="modal fade" id="confirma-exclusao">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title">Excluir curso</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <p>Confirma exclusão da disciplina?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal de Cadastro de Curso-->
+    <div class="modal fade" id="cadastro-curso">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title">Cadastro de curso</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3">
+                        <div class="col-3">
+                            <label for="inputAddress" class="form-label">Id</label>
+                            <input type="text" class="form-control" id="inputAddress" placeholder="001" disabled>
+                        </div>
+                        <div class="col-9">
+                            <label for="inputAddress" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="inputAddress" placeholder="">
+                        </div>
+                        <div class="col-6">
+                            <label for="inputState" class="form-label">Nível</label>
+                            <select id="inputState" class="form-select">
+                                <option selected>Graduação</option>
+                                <option>Pós-Graduação</option>
+                                <option>Doutorado</option>
+                                <option>Mestrado</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputState" class="form-label">Tipo</label>
+                            <select id="inputState" class="form-select">
+                                <option selected>Presencial</option>
+                                <option>Ead</option>
+                                <option>Misto</option>
+                            </select>
+                        </div>
+                        <div class="container bg-light p-3 my-3">
+                            <div class="row mb-3 align-items-center">
+                              <h6 class="form-label mt-3">Disciplinas por Semestre</h6>
+                            </div>
+                          
+                            <div class="row align-items-center mb-2">
+                              <!-- Disciplina -->
+                              <div class="col-6">
+                                <input type="text" class="form-control" id="nome" placeholder="Disciplina" />
+                              </div>
+                          
+                              <!-- Semestre -->
+                              <div class="col-3">
+                                <input type="text" class="form-control" id="semestre" placeholder="Semestre" />
+                              </div>
+                          
+                              <!-- Ícone de lixeira -->
+                              <div class="col-2 text-center">
+                                <button id="btn_unfilter" type="button" class="btn btn-outline-danger">
+                                  <i class="bi bi-trash"></i>
+                                </button>
+                              </div>
+                          
+                              <!-- Botão de adicionar -->
+                              <div class="my-3">
+                                <button class="btn btn-outline-primary">
+                                  +
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <!-- Navbar Section -->
+        <div class="l-navbar">
+            <nav class="nav">
+                <div>
+                    <a href="Index.html" class="nav_logo">
+                        <i class='bx bx-layer nav_logo-icon'></i>
+                        <span class="nav_logo-name">Secretário</span>
+                    </a>
+
+                    <!-- Navigation Links -->
+                    <div class="nav_list">
+
+                        <a href="gestão-usuario.html" class="nav_link">
+                            <i class='bx bx-user nav_icon'></i>
+                            <span class="nav_name">Gestão de Usuários</span>
+                        </a>
+                        <a href="gestão-cursos.html" class="nav_link">
+                            <i class='bx bx-message-square-detail nav_icon'></i>
+                            <span class="nav_name">Gestão de Cursos</span>
+                        </a>
+                        <a href="relatorios.html" class="nav_link">
+                            <i class='bx bx-grid-alt nav_icon'></i>
+                            <span class="nav_name">Relátorios</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Sign Out Link -->
+                <a href="/src/index.html" class="nav_link">
+                    <i class='bx bx-log-out nav_icon'></i>
+                    <span class="nav_name">Sair</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content Section -->
+        <div class="height-100">
+        <h4>Gestão de Cursos</h4>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-1">
+                    <input type="text" class="form-control" id="" placeholder="Id">
+                </div>
+                <div class="col-3">
+                    <input type="text" class="form-control" id="" placeholder="Nome">                   
+                </div>
+                <div class="col-2">
+                    <select class="form-select" id="" aria-label="">
+                        <option value="" selected>Nível</option>
+                        <option value="2">Graduação</option>
+                        <option value="1">Pós-Graduação</option>
+                        <option value="0">Doutorado</option>
+                        <option value="0">Mestrado</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <select class="form-select" id="" aria-label="">
+                        <option value="" selected>Tipo</option>
+                        <option value="2">Presencial</option>
+                        <option value="1">EAd</option>
+                        <option value="0">Misto</option>
+                    </select>
+                </div>
+                <div class="col-4">
+                    <button id="btn_add" type="button" class="btn btn-primary">
+                        Pesquisar
+                    </button>
+                    <button id="btn_unfilter" type="button" class="btn btn-secondary">Limpar busca</button>
+                    <button id="btn_unfilter" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cadastro-curso">Novo Registro</button>
+                </div>
+            </div>
+            <br>    
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Nível</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Disciplinas</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Análise e Desenvolvimento de Sistemas</td>
+                        <td>Graduação</td>
+                        <td>Misto</td>
+                        <td>15</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#cadastro-curso">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirma-exclusao">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Análise e Desenvolvimento de Sistemas</td>
+                        <td>Graduação</td>
+                        <td>Misto</td>
+                        <td>11</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#cadastro-curso">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirma-exclusao">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Análise e Desenvolvimento de Sistemas</td>
+                        <td>Graduação</td>
+                        <td>Misto</td>
+                        <td>7</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#cadastro-curso">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirma-exclusao">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Análise e Desenvolvimento de Sistemas</td>
+                        <td>Graduação</td>
+                        <td>Misto</td>
+                        <td>15</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#cadastro-curso">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirma-exclusao">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Análise e Desenvolvimento de Sistemas</td>
+                        <td>Graduação</td>
+                        <td>Misto</td>
+                        <td>21</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#cadastro-curso">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirma-exclusao">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Análise e Desenvolvimento de Sistemas</td>
+                        <td>Graduação</td>
+                        <td>Misto</td>
+                        <td>15</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#cadastro-curso">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirma-exclusao">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Análise e Desenvolvimento de Sistemas</td>
+                        <td>Graduação</td>
+                        <td>Misto</td>
+                        <td>35</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#cadastro-curso">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirma-exclusao">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Análise e Desenvolvimento de Sistemas</td>
+                        <td>Graduação</td>
+                        <td>Misto</td>
+                        <td>15</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#cadastro-curso">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirma-exclusao">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+
+</html>
