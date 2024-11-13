@@ -4,7 +4,7 @@
 
 `CURSO: Análise e Desenvolvimento de Sistemas`
 
-`DISCIPLINA: Trabalho Interdisciplinar Desenvolvimento de Aplicação Interativa`
+`DISCIPLINA: Trabalho Interdisciplinar Desenvolvimento de AplicInterativa`
 
 `3º semestre`
 
