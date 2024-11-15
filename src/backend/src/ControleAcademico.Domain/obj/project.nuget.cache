@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "V1JD+v43b0qgGSJuVrom1hwbH/Kcpga9XXybXTg9EKCA0fjie6rBvpSfJgqLh5gOlBtQlemty/4VBQ6SvR6Hzw==",
+  "dgSpecHash": "5oxCCLdV8+cmaV2MUmjhb6egzNPzuPRl3m5CnL+pp0Rdem3bD2GHV+GQJDcQtSoQberJtvaUX3YoLDExf0vT3A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\pedro\\OneDrive\\Documentos\\Teste\\2024-2-p3-tidai-controleacademico\\src\\backend\\src\\ControleAcademico.Domain\\ControleAcademico.Domain.csproj",
+  "projectFilePath": "C:\\Users\\davil\\OneDrive\\Documentos\\GitHub\\AAA\\src\\backend\\src\\ControleAcademico.Domain\\ControleAcademico.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
