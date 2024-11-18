@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { Button, Modal } from 'react-bootstrap'; 
+import React, { useState, useEffect } from 'react';
 import DeleteModal from '../../components/common/ModalConfirmaExclusão';
 import '../../styles/index.css';
 import UsuarioForm from '../../components/secretario/UsuarioForm';
@@ -8,8 +7,7 @@ import UsuarioLista from '../../components/secretario/UsuarioLista';
 const ViewCadastroUser = () => {
   const initialState = [
     {
-      id: '1',
-      Matrícula: '00001',
+      Matrícula: '1',
       Nome: 'Wagner Cipriano',
       Cpf: '48974587510',
       Email: 'wagner@gmail.com',
@@ -17,11 +15,9 @@ const ViewCadastroUser = () => {
       Tipo: '2',
       Senha: '654321',
       Curso: 'ADS',
-      Disciplinas: '13'
     },
     {
-      id: '2',
-      Matrícula: '00002',
+      Matrícula: '2',
       Nome: 'Pedro Henrique Ferreira Gomes Martins',
       Cpf: '15387954810',
       Email: 'pedro@gmail.com',
@@ -29,7 +25,6 @@ const ViewCadastroUser = () => {
       Tipo: '1',
       Senha: '123456',
       Curso: 'ADS',
-      Disciplinas: '8'
     },
   ];
 
@@ -41,39 +36,52 @@ const ViewCadastroUser = () => {
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
 
-  const [usuarios, setUsuarios] = useState(initialState);
-  const [usuario, setUsuario] = useState({});
+  const [index, setIndex] = useState(0);
+  const [usuarios, setUsuarios] = useState(initialState || []);
+  const [usuario, setUsuario] = useState({ Matrícula: 0 });
 
-  function addUsuario(e) {
-    e.preventDefault();
-    const usuario = {
-      Matrícula: Math.max.apply(Math, usuarios.map((item)=>item.Matrícula))+1,
-      Nome: document.getElementById('nome').value,
-      Cpf: document.getElementById('cpf').value,
-      Email: document.getElementById('email').value,
-      Endereço: document.getElementById('endereço').value,
-      Tipo: document.getElementById('tipo').value,
-      Senha: document.getElementById('senha').value,
-      Curso: document.getElementById('curso').value,
-    };
-    setUsuarios([...usuarios, { ...usuario }]);
+  useEffect(() => {
+    usuarios.length <= 0
+      ? setIndex(1)
+      : setIndex(
+        Math.max.apply(
+          Math,
+          usuarios.map((item) => item.Matrícula)
+        ) + 1
+      );
+  }, [usuarios]);
+
+  function addUsuario(usuario) {
+    setUsuarios([...usuarios, { ...usuario, Matrícula: index }]);
   }
 
-  function deletarUsuario(matricula) {
-    const usuariosFiltrados = usuarios.filter(usuario => usuario.Matrícula !== matricula);
-    setUsuarios(usuariosFiltrados);
+  function deletarUsuario(Matrícula) {
+    const usuariosFiltrados = usuarios.filter(
+      (usuario) => usuario.Matrícula !== Matrícula);
+    setUsuarios([...usuariosFiltrados]);
   }
 
-  function pegarUsuario(matricula){
-    const usuario = usuarios.filter(usuario => usuario.Matrícula === matricula);
-    setUsuario(usuario[0])
+  function pegarUsuario(Matrícula) {
+    const usuario = usuarios.filter((usuario) => usuario.Matrícula === Matrícula);
+    setUsuario(usuario[0]);
+  }
+
+  function atualizarUsuario(usuario) {
+    setUsuarios(
+      usuarios.map((item) => (item.Matrícula === usuario.Matrícula ? usuario : item))
+    );
+    setUsuario({ Matrícula: 0 });
+  }
+
+  function cancelarUsuario() {
+    setUsuario({ Matrícula: 0 });
   }
 
   return (
     <div className="height-100">
       <h4 className='p-5'>Gestão de Usuários</h4>
       <div className="container">
-        {/* Botões de controle */}
+        {/* Filtros */}
         <div className="row mb-3">
           <div className="col-2">
             <input type="text" className="form-control" placeholder="Matrícula" />
@@ -103,6 +111,7 @@ const ViewCadastroUser = () => {
           </div>
         </div>
 
+        {/* Tabela */}
         <table className="table table-striped table-responsive">
           <thead>
             <tr>
@@ -119,28 +128,27 @@ const ViewCadastroUser = () => {
           </thead>
           <tbody>
             <UsuarioLista
-              usuarios={usuarios} // Passando a lista de usuários
-              deletarUsuario={deletarUsuario} // Passando a função deletarUsuario
-              pegarUsuario={pegarUsuario} // Passando a função de deletar
-              handleShow={handleShow} // Passando a função handleShow
+              key={usuario.Matrícula}
+              deletarUsuario={deletarUsuario}
+              pegarUsuario={pegarUsuario}
+              show={show}
+              handleShow={handleShow}
+              usuario={usuario}
+              usuarios={usuarios}
             />
           </tbody>
         </table>
 
-        {/* Modal de Cadastro */}
-        <Modal show={show} onHide={handleClose} animation={false}>
-          <Modal.Header closeButton>
-            <Modal.Title>Novo Registro</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <UsuarioForm 
-             usuarioSelecionado={usuario}/>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>Fechar</Button>
-            <Button variant="primary" onClick={addUsuario}>Salvar</Button>
-          </Modal.Footer>
-        </Modal>
+        <UsuarioForm
+          addUsuario={addUsuario}
+          cancelarUsuario={cancelarUsuario}
+          atualizarUsuario={atualizarUsuario}
+          usuarios={usuarios}
+          usuarioSelecionado={usuario}
+          show={show}
+          handleShow={handleShow}
+          handleClose={handleClose} />
+
 
         {/* Delete Confirmation Modal */}
         <DeleteModal show2={show2} handleClose2={handleClose2} />
