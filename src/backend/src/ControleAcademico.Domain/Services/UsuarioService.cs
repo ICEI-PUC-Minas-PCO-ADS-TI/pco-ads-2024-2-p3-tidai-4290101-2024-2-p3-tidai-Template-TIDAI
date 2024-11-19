@@ -23,7 +23,7 @@ namespace ControleAcademico.Domain.Services
             var usuariosComMesmoNome = await _UsuarioRepo.PegarUsuarioPorTudoAsync(nome: model.Nome);
             if (usuariosComMesmoNome.FirstOrDefault() != null)
                 throw new InvalidOperationException("Já existe um usuário com esse nome.");
-
+            model.Matricula = 0;
             // Adiciona o novo usuário
             _UsuarioRepo.Adicionar(model);
 

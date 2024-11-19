@@ -14,21 +14,20 @@ export default function UsuarioLista(props) {
     <>
       {props.usuarios.map((usuario) => (
         <tr>
-          <td>{usuario.Matrícula}</td>
-          <td>{usuario.Nome}</td>
-          <td>{usuario.Cpf}</td>
-          <td>{usuario.Email}</td>
-          <td>{usuario.Endereço}</td>
-          <td>{TipoLabel(usuario.Tipo)}</td>
-          <td>{usuario.Curso}</td>
+          <td>{usuario.matricula}</td>
+          <td>{usuario.nome}</td>
+          <td>{usuario.cpf}</td>
+          <td>{usuario.email}</td>
+          <td>{usuario.endereco}</td>
+          <td>{usuario.tipo}</td>
+          <td>{usuario.idCurso}</td>
           <td>
             <button
               type="button"
               className="btn btn-outline-primary"
               onClick={() => {
-                props.pegarUsuario(usuario.Matrícula); // Chama pegarUsuario
-                props.handleShow(); // Chama handleShow
-              }}
+                props.pegarUsuario(usuario.matricula); // Chama pegarUsuario
+                }}
             >
               <i className="fa-regular fa-pen-to-square"></i>
             </button>
@@ -38,7 +37,7 @@ export default function UsuarioLista(props) {
             <button
               type="button"
               className="btn btn-outline-danger"
-              onClick={() => props.deletarUsuario(usuario.Matrícula)}
+              onClick={() => props.handleConfirmModal(usuario.matricula)}
             >
               <i className="fa-regular fa-trash-can"></i>
             </button>

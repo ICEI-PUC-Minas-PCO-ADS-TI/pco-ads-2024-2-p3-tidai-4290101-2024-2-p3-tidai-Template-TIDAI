@@ -78,7 +78,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors("AllowAll"); // Adicionando o uso da política de CORS
+            app.UseCors(option => option.AllowAnyHeader()
+                                        .AllowAnyMethod()
+                                        .AllowAnyOrigin());
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

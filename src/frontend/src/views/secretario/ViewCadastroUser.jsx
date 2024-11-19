@@ -1,81 +1,112 @@
 import React, { useState, useEffect } from 'react';
-import DeleteModal from '../../components/common/ModalConfirmaExclusão';
+import { Modal } from 'react-bootstrap';
 import '../../styles/index.css';
 import UsuarioForm from '../../components/secretario/UsuarioForm';
 import UsuarioLista from '../../components/secretario/UsuarioLista';
+import api from '../../api/api';
 
 const ViewCadastroUser = () => {
-  const initialState = [
-    {
-      Matrícula: '1',
-      Nome: 'Wagner Cipriano',
-      Cpf: '48974587510',
-      Email: 'wagner@gmail.com',
-      Endereço: 'Rua Santo Antônio 71',
-      Tipo: '2',
-      Senha: '654321',
-      Curso: 'ADS',
-    },
-    {
-      Matrícula: '2',
-      Nome: 'Pedro Henrique Ferreira Gomes Martins',
-      Cpf: '15387954810',
-      Email: 'pedro@gmail.com',
-      Endereço: 'Rua Del Rey 122',
-      Tipo: '1',
-      Senha: '123456',
-      Curso: 'ADS',
-    },
-  ];
 
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [showUsuarioModal, setShowUsuarioModal] = useState(false);
+  const [smShowConfirmModal, setSmShowConfirmModal] = useState(false);
 
-  const [show2, setShow2] = useState(false);
-  const handleClose2 = () => setShow2(false);
-  const handleShow2 = () => setShow2(true);
+  const handleUsuarioModal = () =>
+    setShowUsuarioModal(!showUsuarioModal);
 
-  const [index, setIndex] = useState(0);
-  const [usuarios, setUsuarios] = useState(initialState || []);
-  const [usuario, setUsuario] = useState({ Matrícula: 0 });
+  const handleConfirmModal = (matricula) => {
+    if (matricula !== 0 && matricula !== undefined) {
+      const usuario = usuarios.filter(
+        (usuario) => usuario.matricula === matricula
+      );
+      setUsuario(usuario[0]);
+    } else {
+      setUsuario({ matricula: 0 });
+    }
+    setSmShowConfirmModal(!smShowConfirmModal);
+  };
+
+  const [usuarios, setUsuarios] = useState([]);
+  const [usuario, setUsuario] = useState({ matricula: 0 });
+
+
+  const novoUsuario = () => {
+    setUsuario({ matricula: 0 });
+    handleUsuarioModal();
+  };
+
+  const pegaTodosUsuarios = async () => {
+    const response = await api.get('Usuarios');
+    return response.data;
+  };
 
   useEffect(() => {
-    usuarios.length <= 0
-      ? setIndex(1)
-      : setIndex(
-        Math.max.apply(
-          Math,
-          usuarios.map((item) => item.Matrícula)
-        ) + 1
-      );
-  }, [usuarios]);
+    const getUsuarios = async () => {
+      const todasUsuarios = await pegaTodosUsuarios();
+      if (todasUsuarios) setUsuarios(todasUsuarios);
+    };
+    getUsuarios();
+  }, []);
 
-  function addUsuario(usuario) {
-    setUsuarios([...usuarios, { ...usuario, Matrícula: index }]);
+  const addUsuario = async (usuario) => {
+    handleUsuarioModal();
+    const response = await api.post('Usuarios', usuario);
+    console.log(response.data);
+    setUsuarios([...usuarios, response.data]);
   }
 
-  function deletarUsuario(Matrícula) {
-    const usuariosFiltrados = usuarios.filter(
-      (usuario) => usuario.Matrícula !== Matrícula);
-    setUsuarios([...usuariosFiltrados]);
+  const deletarUsuario = async (matricula) => {
+    handleConfirmModal(0);
+    if (await api.delete(`Usuarios/${matricula}`)) {
+      const usuariosFiltrados = usuarios.filter(
+        (usuario) => usuario.matricula !== matricula);
+      setUsuarios([...usuariosFiltrados]);
+    }
   }
 
-  function pegarUsuario(Matrícula) {
-    const usuario = usuarios.filter((usuario) => usuario.Matrícula === Matrícula);
+  const pegarUsuario = (matricula) => {
+    const usuario = usuarios.filter((usuario) => usuario.matricula === matricula);
     setUsuario(usuario[0]);
+    handleUsuarioModal();
   }
 
-  function atualizarUsuario(usuario) {
+  const atualizarUsuario = async (usuario) => {
+    handleUsuarioModal();
+    const response = await api.put(`Usuarios/${usuario.matricula}`, usuario);
+    const { matricula } = response.data;
     setUsuarios(
-      usuarios.map((item) => (item.Matrícula === usuario.Matrícula ? usuario : item))
+      usuarios.map((item) => (item.matricula === matricula ? response.data : item))
     );
-    setUsuario({ Matrícula: 0 });
+    setUsuario({ matricula: 0 });
   }
 
-  function cancelarUsuario() {
-    setUsuario({ Matrícula: 0 });
+  const cancelarUsuario = () => {
+    setUsuario({ matricula: 0 });
+    handleUsuarioModal();
   }
+
+  const [filtros, setFiltros] = useState({
+    matricula: '',
+    nome: '',
+    cpf: '',
+    tipo: '',
+});
+const filtrarUsuarios = () => {
+    const usuariosFiltrados = usuarios.filter((usuario) => {
+        return (
+            (filtros.matricula === '' || usuario.matricula.toString().includes(filtros.matricula)) &&
+            (filtros.nome === '' || usuario.nome.toLowerCase().includes(filtros.nome.toLowerCase())) &&
+            (filtros.cpf === '' || usuario.cpf.includes(filtros.cpf)) &&
+            (filtros.tipo === '' || usuario.tipo === filtros.tipo) // Verifique a comparação correta
+        );
+    });
+    setUsuarios(usuariosFiltrados);
+};
+
+const limparFiltros = async () => {
+  setFiltros({ matricula: '', nome: '', cpf: '', tipo: '' });
+  const todasUsuarios = await pegaTodosUsuarios();
+  setUsuarios(todasUsuarios);
+};
 
   return (
     <div className="height-100">
@@ -84,38 +115,64 @@ const ViewCadastroUser = () => {
         {/* Filtros */}
         <div className="row mb-3">
           <div className="col-2">
-            <input type="text" className="form-control" placeholder="Matrícula" />
+            <input
+              type="text"
+              className="form-control"
+              placeholder="matricula"
+              value={filtros.matricula}
+              onChange={(e) => setFiltros({ ...filtros, matricula: e.target.value })}
+            />
           </div>
           <div className="col-2">
-            <input type="text" className="form-control" placeholder="Nome" />
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Nome"
+              value={filtros.nome}
+              onChange={(e) => setFiltros({ ...filtros, nome: e.target.value })}
+            />
           </div>
           <div className="col-2">
-            <input type="text" className="form-control" placeholder="Cpf" />
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Cpf"
+              value={filtros.cpf}
+              onChange={(e) => setFiltros({ ...filtros, cpf: e.target.value })}
+            />
           </div>
           <div className="col-2">
-            <select className="form-select">
-              <option value="" selected>Todos</option>
-              <option value="2">Alunos</option>
-              <option value="1">Professores</option>
-              <option value="0">Secretário</option>
-            </select>
+          <select
+  className="form-select"
+  value={filtros.tipo}
+  onChange={(e) => setFiltros({ ...filtros, tipo: e.target.value ? parseInt(e.target.value) : '' })}
+>
+  <option value="">Todos</option>
+  <option value="0">Alunos</option>
+  <option value="1">Professores</option>
+  <option value="2">Secretário</option>
+</select>
+
           </div>
           <div className="col-4">
-            <button id="btn_add" type="button" className="btn btn-primary me-1">
+            <button id="btn_add" type="button" className="btn btn-primary me-1" onClick={filtrarUsuarios}>
               Pesquisar
             </button>
-            <button id="btn_unfilter" type="button" className="btn btn-secondary me-4">Limpar busca</button>
-            <button type="button" className="btn btn-success" onClick={handleShow}>
+            <button id="btn_unfilter" type="button" className="btn btn-secondary me-4" onClick={limparFiltros}>
+              Limpar busca
+            </button>
+            <button type="button" className="btn btn-success" onClick={novoUsuario}>
               Novo Registro
             </button>
           </div>
         </div>
 
+
         {/* Tabela */}
         <table className="table table-striped table-responsive">
           <thead>
             <tr>
-              <th scope="col">Matrícula</th>
+              <th scope="col">matricula</th>
               <th scope="col">Nome</th>
               <th scope="col">Cpf</th>
               <th scope="col">Email</th>
@@ -128,30 +185,65 @@ const ViewCadastroUser = () => {
           </thead>
           <tbody>
             <UsuarioLista
-              key={usuario.Matrícula}
+              key={usuario.matricula}
               deletarUsuario={deletarUsuario}
               pegarUsuario={pegarUsuario}
-              show={show}
-              handleShow={handleShow}
               usuario={usuario}
               usuarios={usuarios}
+              handleConfirmModal={handleConfirmModal}
             />
           </tbody>
         </table>
 
-        <UsuarioForm
-          addUsuario={addUsuario}
-          cancelarUsuario={cancelarUsuario}
-          atualizarUsuario={atualizarUsuario}
-          usuarios={usuarios}
-          usuarioSelecionado={usuario}
-          show={show}
-          handleShow={handleShow}
-          handleClose={handleClose} />
 
 
-        {/* Delete Confirmation Modal */}
-        <DeleteModal show2={show2} handleClose2={handleClose2} />
+        <Modal show={showUsuarioModal} onHide={handleUsuarioModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Registro Usuario</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <UsuarioForm
+              addUsuario={addUsuario}
+              cancelarUsuario={cancelarUsuario}
+              atualizarUsuario={atualizarUsuario}
+              usuarios={usuarios}
+              usuarioSelecionado={usuario} />
+
+          </Modal.Body>
+        </Modal>
+
+        <Modal
+          size='sm'
+          show={smShowConfirmModal}
+          onHide={handleConfirmModal}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>
+              Excluindo Usuario{' '}
+              {usuario.matricula !== 0 ? usuario.matricula : ''}
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Tem certeza que deseja Excluir a Atividade {usuario.matricula}
+          </Modal.Body>
+          <Modal.Footer className='d-flex justify-content-between'>
+            <button
+              className='btn btn-outline-success me-2'
+              onClick={() => deletarUsuario(usuario.matricula)}
+            >
+              <i className='fas fa-check me-2'></i>
+              Sim
+            </button>
+            <button
+              className='btn btn-danger me-2'
+              onClick={() => handleConfirmModal(0)}
+            >
+              <i className='fas fa-times me-2'></i>
+              Não
+            </button>
+          </Modal.Footer>
+        </Modal>
+
       </div>
     </div>
   );

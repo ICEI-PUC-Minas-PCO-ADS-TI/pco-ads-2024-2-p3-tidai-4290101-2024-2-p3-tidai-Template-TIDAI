@@ -1,23 +1,31 @@
 import { useState, useEffect } from 'react';
-import { Button, Modal } from 'react-bootstrap';
-
+import { Button } from 'react-bootstrap';
 
 const usuarioInicial = {
-    Matrícula: 0,
-    Nome: '',
-    Cpf: '',
-    Email: '',
-    Endereço: '',
-    Tipo: 0,
-    Senha: '',
-    Curso: '',
+    matricula: 0,
+    nome: '',
+    cpf: '',
+    email: '',
+    endereco: '',
+    tipo: '',
+    senha: '',
+    idCurso: '',
+    idCursoNavigation: null,
 };
 
 export default function UsuarioForm(props) {
+    const usuarioAtual = () => {
+        if (props.usuarioSelecionado.matricula !== 0) {
+            return props.usuarioSelecionado;
+        } else {
+            return usuarioInicial;
+        }
+    };
+
     const [usuario, setUsuario] = useState(usuarioAtual());
 
     useEffect(() => {
-        if (props.usuarioSelecionado.Matrícula !== 0) setUsuario(props.usuarioSelecionado);
+        if (props.usuarioSelecionado.matricula !== 0) setUsuario(props.usuarioSelecionado);
     }, [props.usuarioSelecionado]);
 
     const inputTextHandler = (e) => {
@@ -29,129 +37,180 @@ export default function UsuarioForm(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (props.usuarioSelecionado.Matrícula !== 0) props.atualizarUsuario(usuario);
-        else props.addUsuario(usuario);
+        // Validação de todos os campos obrigatórios
+        if (
+            !usuario.nome.trim() ||
+            !usuario.cpf.trim() ||
+            usuario.tipo === '' ||
+            !usuario.email.trim() ||
+            !usuario.endereco.trim() ||
+            !usuario.senha.trim() ||
+            !usuario.idCurso
+        ) {
+            alert('Por favor, preencha todos os campos obrigatórios.');
+            return;
+        }
+
+        // Verifique se está atualizando ou adicionando
+        if (props.usuarioSelecionado.matricula !== 0) {
+            props.atualizarUsuario(usuario);
+        } else {
+            props.addUsuario(usuario);
+        }
 
         setUsuario(usuarioInicial);
     };
-
-    function usuarioAtual() {
-        if (props.usuarioSelecionado.Matrícula !== 0) {
-            return props.usuarioSelecionado;
-        } else {
-            return usuarioInicial;
-        }
-    }
 
     const handleCancelar = (e) => {
         e.preventDefault();
 
         props.cancelarUsuario();
-
         setUsuario(usuarioInicial);
     };
+
     return (
         <>
-            <Modal show={props.show} onHide={props.handleClose} animation={false}>
-                <Modal.Header>
-                    <Modal.Title>Registro Usuario</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <form className="row g-3" onSubmit={handleSubmit}>
-                        <div className="col-12">
-                            <label className="form-label">Nome</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="nome"
-                                name="Nome" // Mudei para o campo correto
-                                onChange={inputTextHandler}
-                                value={usuario.Nome} // Use o valor correto
-                            />
-                        </div>
-                        <div className="col-8">
-                            <label className="form-label">Cpf</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="cpf"
-                                name="Cpf" // Mudei para o campo correto
-                                onChange={inputTextHandler}
-                                value={usuario.Cpf} // Use o valor correto
-                            />
-                        </div>
-                        <div className="col-md-4">
-                            <label htmlFor="inputState" className="form-label">Tipo</label>
-                            <select
-                                id="tipo"
-                                className="form-select"
-                                name="Tipo" // Mudei para o campo correto
-                                onChange={inputTextHandler}
-                                value={usuario.Tipo}
-                            >
-                                <option value="0">Selecione</option>
-                                <option value="1">Aluno</option>
-                                <option value="2">Professor</option>
-                                <option value="3">Secretário</option>
-                            </select>
-                        </div>
-                        <div className="col-12">
-                            <label htmlFor="inputEmail4" className="form-label">Email</label>
-                            <input
-                                type="email"
-                                className="form-control"
-                                id="email"
-                                name="Email" // Mudei para o campo correto
-                                onChange={inputTextHandler}
-                                value={usuario.Email} // Use o valor correto
-                            />
-                        </div>
-                        <div className="col-8">
-                            <label className="form-label">Endereço</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="endereco"
-                                name="Endereço" // Mudei para o campo correto
-                                onChange={inputTextHandler}
-                                value={usuario.Endereço} // Use o valor correto
-                            />
-                        </div>
-                        <div className="col-4">
-                            <label className="form-label">Senha</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="senha"
-                                name="Senha" // Mudei para o campo correto
-                                onChange={inputTextHandler}
-                                value={usuario.Senha} // Use o valor correto
-                            />
-                        </div>
-                        <div className="col-12 bg-light">
-                            <label htmlFor="inputState" className="form-label">Curso</label>
-                            <select
-                                id="curso"
-                                className="form-select"
-                                name="Curso" // Mudei para o campo correto
-                                onChange={inputTextHandler}
-                                value={usuario.Curso} // Use o valor correto
-                            >
-                                <option value="0">Selecione</option>
-                                <option value="1">SI</option>
-                                <option value="2">ADS</option>
-                                <option value="3">Direito</option>
-                            </select>
-                        </div>
-                        {
-                        usuario.Matrícula === 0
-                            ? <Button variant="secondary" onClick={props.handleClose}>Fechar</Button>//novo
-                            : <Button variant="secondary" onClick={handleCancelar}>Fechar</Button>//atualizar
-                    }
-                        <Button variant="primary" type='submit'>Salvar</Button>
-                    </form>
-                </Modal.Body>
-            </Modal>
+            <form className="row g-3" onSubmit={handleSubmit}>
+                {/* Nome */}
+                <div className="col-12">
+                    <label className="form-label">
+                        Nome <span style={{ color: 'red' }}>*</span>
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="nome"
+                        name="nome"
+                        onChange={inputTextHandler}
+                        value={usuario.nome}
+                        required
+                    />
+                </div>
+
+                {/* CPF */}
+                <div className="col-8">
+                    <label className="form-label">
+                        CPF <span style={{ color: 'red' }}>*</span>
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="cpf"
+                        name="cpf"
+                        onChange={inputTextHandler}
+                        value={usuario.cpf}
+                        required
+                    />
+                </div>
+
+                {/* Tipo */}
+                <div className="col-md-4">
+                    <label htmlFor="inputState" className="form-label">
+                        Tipo <span style={{ color: 'red' }}>*</span>
+                    </label>
+                    <select
+                        id="tipo"
+                        className="form-select"
+                        name="tipo"
+                        onChange={inputTextHandler}
+                        value={usuario.tipo}
+                        required
+                    >
+                        <option value="">Selecione</option>
+                        <option value="0">Aluno</option>
+                        <option value="1">Professor</option>
+                        <option value="2">Secretário</option>
+                    </select>
+                </div>
+
+                {/* Email */}
+                <div className="col-12">
+                    <label htmlFor="inputEmail4" className="form-label">
+                        Email <span style={{ color: 'red' }}>*</span>
+                    </label>
+                    <input
+                        type="email"
+                        className="form-control"
+                        id="email"
+                        name="email"
+                        onChange={inputTextHandler}
+                        value={usuario.email}
+                        required
+                    />
+                </div>
+
+                {/* Endereço */}
+                <div className="col-8">
+                    <label className="form-label">
+                        Endereço <span style={{ color: 'red' }}>*</span>
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="endereco"
+                        name="endereco"
+                        onChange={inputTextHandler}
+                        value={usuario.endereco}
+                        required
+                    />
+                </div>
+
+                {/* Senha */}
+                <div className="col-4">
+                    <label className="form-label">
+                        Senha <span style={{ color: 'red' }}>*</span>
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="senha"
+                        name="senha"
+                        onChange={inputTextHandler}
+                        value={usuario.senha}
+                        required
+                    />
+                </div>
+
+                {/* Curso */}
+                <div className="col-12 bg-light">
+                    <label htmlFor="inputState" className="form-label">
+                        Curso <span style={{ color: 'red' }}>*</span>
+                    </label>
+                    <select
+                        id="curso"
+                        className="form-select"
+                        name="idCurso"
+                        onChange={inputTextHandler}
+                        value={usuario.idCurso}
+                        required
+                    >
+                        <option value="">Selecione</option>
+                        <option value="1">SI</option>
+                        <option value="2">ADS</option>
+                        <option value="3">Direito</option>
+                    </select>
+                </div>
+
+                {/* Botões */}
+                <div className="row mt-4 border-top">
+                    <div className="col-6">
+                        {usuario.matricula === 0 ? (
+                            <Button variant="secondary" onClick={props.handleClose}>
+                                Fechar
+                            </Button>
+                        ) : (
+                            <Button variant="secondary" onClick={handleCancelar}>
+                                Cancelar
+                            </Button>
+                        )}
+                    </div>
+                    <div className="col-6">
+                        <Button variant="primary" type="submit">
+                            Salvar
+                        </Button>
+                    </div>
+                </div>
+            </form>
         </>
     );
 }
