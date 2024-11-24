@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import '../styles/index.css';
-
 import ViewLogin from './login';
 
-function ViewIndex() {
+export default function ViewIndex() {
     return (
         <div className='body'>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -110,4 +109,4 @@ function ViewIndex() {
     );
 }
 
-export default ViewIndex;
+
