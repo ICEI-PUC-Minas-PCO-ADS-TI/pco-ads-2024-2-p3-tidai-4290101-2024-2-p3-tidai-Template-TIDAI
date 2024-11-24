@@ -4,9 +4,9 @@ import '../styles/App.css';
 
 
 function ViewLogin() {
-      return(
-        <div className="login-page">   
-        <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#003366' }}>
+  return (
+    <div className="login-page">
+      <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#003366' }}>
         {/* Modal de Troca de Senha */}
         <div className="modal fade" id="confirma-exclusao" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog">
@@ -35,24 +35,24 @@ function ViewLogin() {
             </div>
           </div>
         </div>
-  
+
         {/* Formulário de Login */}
         <div className="login-container">
           {/* Logo */}
-          <img 
-            src="https://static.vecteezy.com/ti/vetor-gratis/p1/15668053-modelo-de-design-de-logotipo-da-faculdade-ilustracaoial-logotipo-da-faculdade-da-universidade-distintivos-emblemas-sinais-estoque-logotipo-do-campus-da-faculdade-gratis-vetor.jpg" 
-            alt="Logo da UNIBH" 
+          <img
+            src="https://static.vecteezy.com/ti/vetor-gratis/p1/15668053-modelo-de-design-de-logotipo-da-faculdade-ilustracaoial-logotipo-da-faculdade-da-universidade-distintivos-emblemas-sinais-estoque-logotipo-do-campus-da-faculdade-gratis-vetor.jpg"
+            alt="Logo da UNIBH"
             className="login-logo"
             style={{ width: '150px', height: 'auto' }}
 
           />
-  
+
           <h2 style={{ color: 'white' }}>Sistema de Controle Acadêmico</h2>
-  
+
           {/* Login Form */}
           <form>
             <div className="mb-3">
-              <label htmlFor="login-matricula" className="form-label"style={{ color: 'white' }}>Matrícula</label>
+              <label htmlFor="login-matricula" className="form-label" style={{ color: 'white' }}>Matrícula</label>
               <input type="text" className="form-control" id="login-matricula" placeholder="Matrícula institucional" />
             </div>
             <div className="mb-3">
@@ -61,18 +61,31 @@ function ViewLogin() {
             </div>
             <div className="mb-3 form-check">
               <input type="checkbox" className="form-check-input" id="lembrar" />
-              <label className="form-check-label" htmlFor="lembrar"style={{ color: 'white' }}>Lembrar de mim</label>
+              <label className="form-check-label" htmlFor="lembrar" style={{ color: 'white' }}>Lembrar de mim</label>
             </div>
-            <button type="button" className="btn btn-custom-w-100-mb-1">Confirmar</button>
+            <div>
+  <Link to="/professor" className="btn btn-primary w-100 mb-1">
+    Entrar Professor
+  </Link>
+  <Link to="/aluno" className="btn btn-secondary w-100 mb-1">
+    Entrar Aluno
+  </Link>
+  <Link to="/secretario" className="btn btn-success w-100">
+    Entrar Secretário
+  </Link>
+</div>
+
+
+            {/*<button type="button" className="btn btn-custom-w-100-mb-1">Confirmar</button>*/}
 
           </form>
-  
+
           <div className="row">
             {/* Recuperar Senha */}
             <div className="col-6 text-center mt-3">
               <a href="#confirma-exclusao" data-bs-toggle="modal" data-bs-target="#confirma-exclusao">Esqueceu a senha?</a>
             </div>
-  
+
             <div className="col-6 text-center mt-3">
               <a href="index.html">Voltar a tela inicial</a>
             </div>
@@ -80,7 +93,7 @@ function ViewLogin() {
         </div>
       </div>
     </div>
-      );
-    };
-    
-    export default ViewLogin;
+  );
+};
+
+export default ViewLogin;
