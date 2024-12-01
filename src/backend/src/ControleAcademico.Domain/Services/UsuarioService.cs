@@ -57,7 +57,7 @@ namespace ControleAcademico.Domain.Services
             var usuarios = await _UsuarioRepo.PegarUsuarioPorTudoAsync(matricula: matricula);
             var usuario = usuarios.FirstOrDefault(); // Obter o primeiro usuário encontrado
 
-            if (usuario == null) 
+            if (usuario == null)
                 throw new Exception("Usuário que tentou deletar não existe.");
 
             _UsuarioRepo.Deletar(usuario);
