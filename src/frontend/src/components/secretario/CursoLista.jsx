@@ -5,11 +5,11 @@ const CursoLista = (props) => {
     <table className="table table-striped">
       <thead>
         <tr>
-          <th scope="col">ID</th>
           <th scope="col">Nome</th>
           <th scope="col">Nível</th>
           <th scope="col">Tipo</th>
           <th scope="col">Disciplinas</th>
+          <th></th>
           <th></th>
           <th></th>
         </tr>
@@ -17,10 +17,18 @@ const CursoLista = (props) => {
       <tbody className="table-group-divider">
         {props.cursos.map((curso) => (
           <tr key={curso.idCursos}>
-            <td>{curso.idCursos}</td>
             <td>{curso.nome}</td>
             <td>{curso.nivel}</td>
             <td>{curso.tipo}</td>
+            <td>
+              <button
+                type="button"
+                className="btn btn-outline-success"
+                onClick={() => props.pegarCurso(curso.idCursos)}
+              >
+                Disciplinas
+              </button>
+            </td>
             <td>
               <button
                 type="button"

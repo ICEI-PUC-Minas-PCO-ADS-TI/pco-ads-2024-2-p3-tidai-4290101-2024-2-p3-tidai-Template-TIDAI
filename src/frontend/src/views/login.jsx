@@ -2,31 +2,43 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/App.css';
 
-
 function ViewLogin() {
   return (
     <div className="login-page">
       <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#003366' }}>
-        {/* Modal de Troca de Senha */}
-        <div className="modal fade" id="confirma-exclusao" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        
+        {/* Modal para recuperação de senha */}
+        <div className="modal fade" id="modal-recuperacao-senha" tabIndex="-1" aria-labelledby="modal-recuperacao-senha-label" aria-hidden="true">
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">Esqueci senha</h5>
+                <h5 className="modal-title" id="modal-recuperacao-senha-label">Esqueci minha senha</h5>
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div className="modal-body">
                 <form>
                   <div className="mb-3">
-                    <label htmlFor="matricula" className="form-label">Matrícula</label>
-                    <input type="text" className="form-control" id="matricula" placeholder="Matrícula institucional" />
+                    <label htmlFor="matricula-recuperacao" className="form-label">Matrícula</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="matricula-recuperacao"
+                      placeholder="Informe sua matrícula"
+                    />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="cpf" className="form-label">CPF</label>
-                    <input type="text" className="form-control" id="cpf" placeholder="CPF" />
+                    <label htmlFor="cpf-recuperacao" className="form-label">CPF</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="cpf-recuperacao"
+                      placeholder="Informe seu CPF"
+                    />
                   </div>
                 </form>
-                <p><b>Será enviado por email sua nova senha.</b> Caso não tenha mais acesso ao seu email cadastrado, procure o secretário acadêmico para atualizar suas informações cadastrais.</p>
+                <p className="text-muted">
+                  Sua nova senha será enviada para o email cadastrado. Caso não tenha acesso, procure o setor acadêmico.
+                </p>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -40,60 +52,61 @@ function ViewLogin() {
         <div className="login-container">
           {/* Logo */}
           <img
-            src="https://static.vecteezy.com/ti/vetor-gratis/p1/15668053-modelo-de-design-de-logotipo-da-faculdade-ilustracaoial-logotipo-da-faculdade-da-universidade-distintivos-emblemas-sinais-estoque-logotipo-do-campus-da-faculdade-gratis-vetor.jpg"
-            alt="Logo da UNIBH"
+            src="https://via.placeholder.com/150" 
+            alt="Logo da Instituição"
             className="login-logo"
-            style={{ width: '150px', height: 'auto' }}
-
           />
+          <h2 className="text-white text-center mb-4">Sistema de Controle Acadêmico</h2>
 
-          <h2 style={{ color: 'white' }}>Sistema de Controle Acadêmico</h2>
-
-          {/* Login Form */}
           <form>
             <div className="mb-3">
-              <label htmlFor="login-matricula" className="form-label" style={{ color: 'white' }}>Matrícula</label>
-              <input type="text" className="form-control" id="login-matricula" placeholder="Matrícula institucional" />
+              <label htmlFor="matricula-login" className="form-label text-white">Matrícula</label>
+              <input
+                type="text"
+                className="form-control"
+                id="matricula-login"
+                placeholder="Digite sua matrícula"
+              />
             </div>
             <div className="mb-3">
-              <label htmlFor="senha" className="form-label" style={{ color: 'white' }}>Senha</label>
-              <input type="password" className="form-control" id="senha" placeholder="Sua senha" />
+              <label htmlFor="senha-login" className="form-label text-white">Senha</label>
+              <input
+                type="password"
+                className="form-control"
+                id="senha-login"
+                placeholder="Digite sua senha"
+              />
             </div>
-            <div className="mb-3 form-check">
-              <input type="checkbox" className="form-check-input" id="lembrar" />
-              <label className="form-check-label" htmlFor="lembrar" style={{ color: 'white' }}>Lembrar de mim</label>
+            <div className="form-check mb-3">
+              <input type="checkbox" className="form-check-input" id="lembrar-login" />
+              <label className="form-check-label text-white" htmlFor="lembrar-login">Lembrar de mim</label>
             </div>
-            <div>
-  <Link to="/professor" className="btn btn-primary w-100 mb-1">
-    Entrar Professor
-  </Link>
-  <Link to="/aluno" className="btn btn-secondary w-100 mb-1">
-    Entrar Aluno
-  </Link>
-  <Link to="/secretario" className="btn btn-success w-100">
-    Entrar Secretário
-  </Link>
-</div>
 
-
-            {/*<button type="button" className="btn btn-custom-w-100-mb-1">Confirmar</button>*/}
-
+            {/* Botões para os diferentes tipos de usuários */}
+            <div className="d-grid gap-2">
+              <Link to="/professor" className="btn btn-primary">Entrar como Professor</Link>
+              <Link to="/aluno" className="btn btn-secondary">Entrar como Aluno</Link>
+              <Link to="/secretario" className="btn btn-success">Entrar como Secretário</Link>
+            </div>
           </form>
 
-          <div className="row">
-            {/* Recuperar Senha */}
-            <div className="col-6 text-center mt-3">
-              <a href="#confirma-exclusao" data-bs-toggle="modal" data-bs-target="#confirma-exclusao">Esqueceu a senha?</a>
-            </div>
-
-            <div className="col-6 text-center mt-3">
-              <a href="index.html">Voltar a tela inicial</a>
-            </div>
+          {/* Links adicionais */}
+          <div className="d-flex justify-content-between mt-3">
+            <a
+              href="#modal-recuperacao-senha"
+              data-bs-toggle="modal"
+              className="text-decoration-none text-white"
+            >
+              Esqueceu a senha?
+            </a>
+            <Link to="/" className="text-decoration-none text-white">
+              Voltar à página inicial
+            </Link>
           </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default ViewLogin;
