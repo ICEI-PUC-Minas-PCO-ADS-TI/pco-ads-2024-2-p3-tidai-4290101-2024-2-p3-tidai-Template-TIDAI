@@ -6,6 +6,8 @@ import UsuarioLista from '../../components/secretario/UsuarioLista';
 import api from '../../api/api';
 
 const ViewCadastroUser = () => {
+  const [errorMessage, setErrorMessage] = useState('');
+
 
   const [showUsuarioModal, setShowUsuarioModal] = useState(false);
   const [smShowConfirmModal, setSmShowConfirmModal] = useState(false);
@@ -56,12 +58,38 @@ const ViewCadastroUser = () => {
 
   const deletarUsuario = async (matricula) => {
     handleConfirmModal(0);
-    if (await api.delete(`Usuarios/${matricula}`)) {
-      const usuariosFiltrados = usuarios.filter(
-        (usuario) => usuario.matricula !== matricula);
-      setUsuarios([...usuariosFiltrados]);
+
+    try {
+        const response = await api.delete(`Usuarios/${matricula}`);
+        
+        // Se a exclusão for bem-sucedida, atualize o estado
+        const usuariosFiltrados = usuarios.filter(
+            (usuario) => usuario.matricula !== matricula
+        );
+        setUsuarios([...usuariosFiltrados]);
+
+    } catch (error) {
+        // Exibe a mensagem de erro se não for possível excluir o usuário
+        if (error.response && error.response.data) {
+            const errorMessage = error.response.data.message || "Não é permitido excluir o usuário pois possuí informações cadastrados.";
+            setErrorMessage(errorMessage);  // Armazena a mensagem de erro
+
+            // Remove a mensagem de erro após 3 segundos
+            setTimeout(() => {
+                setErrorMessage('');
+            }, 3000);  // 3000 milissegundos = 3 segundos
+        } else {
+            setErrorMessage("Erro desconhecido ao tentar excluir o usuário.");
+
+            // Remove a mensagem de erro após 3 segundos
+            setTimeout(() => {
+                setErrorMessage('');
+            }, 3000);  // 3000 milissegundos = 3 segundos
+        }
     }
-  }
+}
+
+
 
   const pegarUsuario = (matricula) => {
     const usuario = usuarios.filter((usuario) => usuario.matricula === matricula);
@@ -166,6 +194,12 @@ const limparFiltros = async () => {
             </button>
           </div>
         </div>
+        {errorMessage && (
+    <div className="alert alert-danger mt-3">
+        {errorMessage}
+    </div>
+)}
+
 
 
         {/* Tabela */}
@@ -224,7 +258,7 @@ const limparFiltros = async () => {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            Tem certeza que deseja Excluir a Atividade {usuario.matricula}
+            Tem certeza que deseja Excluir o Usuario {usuario.matricula}
           </Modal.Body>
           <Modal.Footer className='d-flex justify-content-between'>
             <button
