@@ -39,8 +39,6 @@ builder.Services.AddScoped<IRelacionamentoUsuarioDisciplinaService, Relacionamen
 builder.Services.AddScoped<IUsuarioRepo, UsuarioRepo>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
-builder.Services.AddScoped<IEntregarTarefaRepo, EntregarTarefaRepo>();
-builder.Services.AddScoped<IEntregarTarefaService, EntregarTarefaService>();
 
 // Configurando CORS
 builder.Services.AddCors(options =>
@@ -78,7 +76,7 @@ if (app.Environment.IsDevelopment())
         c.RoutePrefix = string.Empty; // Define o Swagger na raiz do localhost
     });
 }
-app.UseCors("AllowAll");  // Aplique o CORS corretamente
+
 app.UseHttpsRedirection();
             app.UseCors(option => option.AllowAnyHeader()
                                         .AllowAnyMethod()

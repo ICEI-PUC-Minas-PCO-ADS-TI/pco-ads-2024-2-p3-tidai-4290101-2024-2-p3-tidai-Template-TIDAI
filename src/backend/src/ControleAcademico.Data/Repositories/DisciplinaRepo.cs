@@ -1,7 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using ControleAcademico.Data.Context;
 using ControleAcademico.Domain.Entities;
 using ControleAcademico.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
+using static ControleAcademico.Domain.Entities.Disciplina;
 
 namespace ControleAcademico.Data.Repositories
 {
