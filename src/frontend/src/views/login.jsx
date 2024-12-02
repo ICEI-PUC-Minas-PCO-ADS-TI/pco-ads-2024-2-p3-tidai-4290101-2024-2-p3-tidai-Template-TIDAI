@@ -1,55 +1,53 @@
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
 import '../styles/App.css';
 
 export default function Login() {
   const [matricula, setMatricula] = useState('');
   const [senha, setSenha] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [showModal, setShowModal] = useState(false); // Controla o estado do modal
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
+    // Verificar se matrícula e senha estão preenchidos
     if (!matricula || !senha) {
-      setErrorMessage('Matrícula e senha são obrigatórios.');
-      setTimeout(() => setErrorMessage(''), 3000);
+      setErrorMessage("Matrícula e senha são obrigatórios.");
       return;
     }
 
     try {
+      // Chama a API de login
       const response = await axios.post('https://localhost:7198/api/Login/login', {
         matricula,
         senha,
       });
 
+      // Se o login for bem-sucedido
       if (response.status === 200) {
         const { matricula, nome, tipo } = response.data;
+        // Armazena os dados do usuário no localStorage
         localStorage.setItem('usuario', JSON.stringify({ matricula, nome, tipo }));
 
-        if (tipo === 'Aluno') {
-          navigate('/aluno');
-        } else if (tipo === 'Professor') {
-          navigate('/professor');
-        } else if (tipo === 'Secretário') {
-          navigate('/secretario');
+        // Lógica para redirecionar o usuário baseado no tipo (string)
+        if (tipo === "Aluno") {
+          navigate('/aluno');  // Redireciona para a página de aluno
+        } else if (tipo === "Professor") {
+          navigate('/professor');  // Redireciona para a página de professor
+        } else if (tipo === "Secretário") {
+          navigate('/secretario');  // Redireciona para a página de secretário
         } else {
-          setErrorMessage('Tipo de usuário inválido.');
-          setTimeout(() => setErrorMessage(''), 3000);
+          setErrorMessage("Tipo de usuário inválido.");
         }
       }
     } catch (error) {
-      console.error(error);
-      setErrorMessage('Matrícula ou senha inválidos.');
-      setTimeout(() => setErrorMessage(''), 3000);
+      // Se ocorrer um erro, exibe a mensagem de erro
+      console.error(error);  // Exibe o erro no console para depuração
+      setErrorMessage("Matrícula ou senha inválidos.");
     }
   };
-
-  const handleModalClose = () => setShowModal(false);
-  const handleModalShow = () => setShowModal(true);
 
   return (
     <div className="login-page">
@@ -61,15 +59,11 @@ export default function Login() {
             className="login-logo"
             style={{ width: '150px', height: 'auto' }}
           />
-          <h2>Sistema de Controle Acadêmico</h2>
-          {errorMessage && (
-            <div className="alert alert-danger mt-3">
-              {errorMessage}
-            </div>
-          )}
+          <h2 style={{ color: 'white' }}>Sistema de Controle Acadêmico</h2>
+
           <form onSubmit={handleLogin}>
             <div className="mb-3">
-              <label htmlFor="login-matricula" className="form-label">Matrícula</label>
+              <label htmlFor="login-matricula" className="form-label" style={{ color: 'white' }}>Matrícula</label>
               <input
                 type="text"
                 className="form-control"
@@ -80,7 +74,7 @@ export default function Login() {
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="senha" className="form-label">Senha</label>
+              <label htmlFor="senha" className="form-label" style={{ color: 'white' }}>Senha</label>
               <input
                 type="password"
                 className="form-control"
@@ -90,37 +84,27 @@ export default function Login() {
                 placeholder="Sua senha"
               />
             </div>
+            <br></br>
+
             <button type="submit" className="btn btn-primary w-100 mb-1">Entrar</button>
+
+            {errorMessage && (
+              <div className="alert alert-danger mt-3">
+                {errorMessage}
+              </div>
+            )}
           </form>
+
           <div className="row">
             <div className="col-6 text-center mt-3">
-              <button className="btn btn-link p-0" onClick={handleModalShow}>
-                Esqueceu a senha?
-              </button>
+              <a href="#confirma-exclusao" data-bs-toggle="modal" data-bs-target="#confirma-exclusao">Esqueceu a senha?</a>
             </div>
             <div className="col-6 text-center mt-3">
-              <Link to="/">Voltar a tela inicial</Link>
+              <a href="index.html">Voltar a tela inicial</a>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Modal usando react-bootstrap */}
-      <Modal show={showModal} onHide={handleModalClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Esqueci minha senha</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>
-            Procure o secretário acadêmico para atualizar suas informações cadastrais, lembre-se de levar documentos que comprovem sua identidade. <b>Após  análise, sua nova senha será enviada por email.</b>
-          </p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="success" onClick={handleModalClose}>
-            Confirmar
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </div>
   );
 }
